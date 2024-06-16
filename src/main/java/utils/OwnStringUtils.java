@@ -1,3 +1,5 @@
+package utils;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -155,8 +157,19 @@ public class OwnStringUtils  {
     }
 
     /**
+     * Left Padding method without using StringUtils.leftPad
      public static String leftPad(String str, int size, String padStr) {
+         String trimmedValue = value.trim();
 
+         if(trimmedValue.length() == value.length()) {
+            return value;
+         }
+
+         StringBuilder newValue = new StringBuilder(trimmedValue);
+
+         IntStream.rangeClosed(1, value.length() - trimmedValue.length())
+            .forEach(it -> newValue.insert(0, "0"));
+         return newValue.toString();
      }
      */
 

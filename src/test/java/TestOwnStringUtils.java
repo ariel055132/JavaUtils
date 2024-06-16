@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import utils.OwnStringUtils;
 
 @DisplayName("Unit Test for my own StringUtils")
 public class TestOwnStringUtils {
@@ -232,5 +233,33 @@ public class TestOwnStringUtils {
 
         // then
         Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test isAlphaNumericSpace - Positive")
+    void testIsAlphaNumericSpacePositive() {
+        // given
+        String cs = "Hello World 123";
+        boolean expectedResult = true;
+
+        // when
+        boolean result = OwnStringUtils.isAlphaNumericSpace(cs);
+
+        // then
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
+    @DisplayName("Test isAlphaNumericSpace - Negative")
+    void testIsAlphaNumericSpaceNegative() {
+        // given
+        String cs = "Hello World 123!";
+        boolean expectedResult = false;
+
+        // when
+        boolean result = OwnStringUtils.isAlphaNumericSpace(cs);
+
+        // then
+        Assertions.assertEquals(expectedResult, result);
     }
 }
