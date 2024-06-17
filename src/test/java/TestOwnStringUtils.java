@@ -66,6 +66,36 @@ public class TestOwnStringUtils {
     }
 
     @Test
+    @DisplayName("Test string utils - EqualsIgnoreCase (Positive)")
+    void testEqualsIgnoreCasePositive() {
+        // given
+        String cs1 = "Hello World";
+        String cs2 = "hello world";
+        boolean expectedResult = true;
+
+        // when
+        boolean result = OwnStringUtils.equalsIgnoreCase(cs1, cs2);
+
+        // then
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
+    @DisplayName("Test string utils - EqualsIgnoreCase (Negative)")
+    void testEqualsIgnoreCaseNegative() {
+        // given
+        String cs1 = "Hello World";
+        String cs2 = "Hello aorld";
+        boolean expectedResult = false;
+
+        // when
+        boolean result = OwnStringUtils.equalsIgnoreCase(cs1, cs2);
+
+        // then
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
     @DisplayName("Test string utils - isEmpty (Positive)")
     void testIsEmptyPositive() {
         // given
@@ -236,7 +266,7 @@ public class TestOwnStringUtils {
     }
 
     @Test
-    @DisplayName("Test isAlphaNumericSpace - Positive")
+    @DisplayName("Test string utils - isAlphaNumericSpace (Positive)")
     void testIsAlphaNumericSpacePositive() {
         // given
         String cs = "Hello World 123";
@@ -250,7 +280,7 @@ public class TestOwnStringUtils {
     }
 
     @Test
-    @DisplayName("Test isAlphaNumericSpace - Negative")
+    @DisplayName("Test string utils - isAlphaNumericSpace (Negative)")
     void testIsAlphaNumericSpaceNegative() {
         // given
         String cs = "Hello World 123!";
@@ -261,5 +291,35 @@ public class TestOwnStringUtils {
 
         // then
         Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
+    @DisplayName("Test string utils - defaultString")
+    void testDefaultString() {
+        // given
+        String str = null;
+        String expectedResult = "";
+
+        // when
+        String actualResult = OwnStringUtils.defaultString(str);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test string utils - substring")
+    void testSubString() {
+        // given
+        String str = "Hello World";
+        int start = 0;
+        int end = 5;
+        String expectedResult = "Hello";
+
+        // when
+        String actualResult = OwnStringUtils.substring(str, start, end);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 }

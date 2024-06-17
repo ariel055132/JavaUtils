@@ -6,7 +6,16 @@ import org.apache.commons.lang3.StringUtils;
  * String 共用函數
  */
 
-public class OwnStringUtils  {
+public class OwnStringUtils extends StringUtils {
+    /**
+     * Give a default value ("") if the string is null.
+     * @param str
+     * @return
+     */
+    public static String defaultString(String str) {
+        return StringUtils.defaultString(str, "");
+    }
+
     /**
      * Check if the substring is contained within the string.
      * 檢查預期字串是否在另一個字串內部，若有則回傳true，否則回傳false
@@ -20,13 +29,24 @@ public class OwnStringUtils  {
 
     /**
      * Check if the string (cs1) is equal to another string (cs2).
-     *
-     * @param cs1
-     * @param cs2
+     * It is case-sensitive.
+     * @param cs1 待檢查的字串 (The string to be checked)
+     * @param cs2 要比對的字串 (The string to be compared)
      * @return
      */
     public static boolean equals(CharSequence cs1, CharSequence cs2) {
         return StringUtils.equals(cs1, cs2);
+    }
+
+    /**
+     * Check if the string (cs1) is equal to another string (cs2).
+     * It is case-insensitive.
+     * @param cs1 待檢查的字串 (The string to be checked)
+     * @param cs2 要比對的字串 (The string to be compared)
+     * @return
+     */
+    public static boolean equalsIgnoreCase(CharSequence cs1, CharSequence cs2) {
+        return StringUtils.equalsIgnoreCase(cs1, cs2);
     }
 
     /**
@@ -173,4 +193,10 @@ public class OwnStringUtils  {
      }
      */
 
+    /**
+     * Substring
+     */
+    public static String substring(String str, int start, int end) {
+        return StringUtils.substring(str, start, end);
+    }
 }
