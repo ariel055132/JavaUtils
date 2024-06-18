@@ -199,4 +199,7 @@ public class OwnStringUtils extends StringUtils {
     public static String substring(String str, int start, int end) {
         return StringUtils.substring(str, start, end);
     }
+
+    private OwnStringUtils() {
+    }
 }
