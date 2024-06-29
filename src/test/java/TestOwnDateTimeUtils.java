@@ -138,4 +138,49 @@ public class TestOwnDateTimeUtils {
         // then
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    @DisplayName("Test date utils - getLengthOfDaysInMonth (normal case)")
+    void testGetLengthOfDaysInMonth() {
+        // given
+        int year = 2024;
+        int month = 6;
+        int expectedResult = 30;
+
+        // when
+        int actualResult = OwnDateTimeUtils.getLengthOfDaysInMonth(year, month);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - getLengthOfDaysInMonth (leap year case)")
+    void testGetLengthOfDaysInMonthLeapYear() {
+        // given
+        int year = 2020;
+        int month = 2;
+        int expectedResult = 29;
+
+        // when
+        int actualResult = OwnDateTimeUtils.getLengthOfDaysInMonth(year, month);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - getLengthOfDaysInMonth (not leap year input)")
+    void testGetLengthOfDaysInMonthNotLeapYear() {
+        // given
+        int year = 2021;
+        int month = 2;
+        int expectedResult = 28;
+
+        // when
+        int actualResult = OwnDateTimeUtils.getLengthOfDaysInMonth(year, month);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }

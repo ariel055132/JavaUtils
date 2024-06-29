@@ -7,6 +7,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -64,8 +65,8 @@ public class OwnDateTimeUtils extends DateUtils {
     /**
      * 將LocalDate(日期)轉換成字串
      * Convert LocalDate to String with given formatter
-     * @param localDate LocalDate
-     * @param formatter DateTimeFormatter
+     * @param localDate LocalDate 日期
+     * @param formatter DateTimeFormatter 日期格式
      * @return String
      */
     public static String localDateToString(LocalDate localDate, DateTimeFormatter formatter) {
@@ -105,7 +106,23 @@ public class OwnDateTimeUtils extends DateUtils {
         return (long) age;
     }
 
+    /**
+     * 根據年份及月份取得該年該月的天數
+     * Retrieve the number of days in a specific month of the year based on input conditions
+     * @param year int 年份
+     * @param month int 月份
+     * @return int 天數
+     */
+    public static int getLengthOfDaysInMonth(int year, int month) {
+        // Null check
+        if (ObjectUtils.isEmpty(year) || ObjectUtils.isEmpty(month)) {
+            return 0;
+        }
+        YearMonth yearMonth = YearMonth.of(year, month);
+        return yearMonth.lengthOfMonth();
+    }
+
     // Constructor only
-    private void OwnDateTimeUtils () {
+    private OwnDateTimeUtils() {
     }
 }
