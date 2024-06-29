@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -35,8 +36,7 @@ public class OwnDateTimeUtils extends DateUtils {
     }
 
     /**
-     * 將字串轉換成LocalDate
-     * Convert String to LocalDate
+     * 使用自定義的日期格式，將日期字串轉換成LocalDate
      * @param dateString 日期字串 (String)
      * @param pattern    日期格式 (String)
      * @return LocalDate
@@ -50,7 +50,8 @@ public class OwnDateTimeUtils extends DateUtils {
     }
 
     /**
-     * 使用自定義的日期格式，將日期字串轉換成LocalDate
+     * 使用DateTimeFormatter，將字串轉換成LocalDate
+     * Convert String to LocalDate
      * @param dateString String
      * @param pattern DateTimeFormatter
      * @return LocalDate
@@ -60,6 +61,34 @@ public class OwnDateTimeUtils extends DateUtils {
             return null;
         }
         return LocalDate.parse(dateString, pattern);
+    }
+
+    /**
+     * 使用DateTimeFormatter，將字串轉換成LocalDateTime
+     * Convert String to LocalDateTime
+     * @param localDateTime String
+     * @param pattern DateTimeFormatter
+     * @return
+     */
+    public static LocalDateTime stringToLocalDateTime(String localDateTime, DateTimeFormatter pattern) {
+        if (StringUtils.isEmpty(localDateTime) || ObjectUtils.isEmpty(pattern)) {
+            return null;
+        }
+        return LocalDateTime.parse(localDateTime, pattern);
+    }
+
+    /**
+     * 使用自定義的日期格式，將日期字串轉換成LocalDateTime
+     * @param localDateTime String
+     * @param pattern String
+     * @return LocalDateTime
+     */
+    public static LocalDateTime stringToLocalDateTime(String localDateTime, String pattern) {
+        if (StringUtils.isEmpty(localDateTime) || StringUtils.isEmpty(pattern)) {
+            return null;
+        }
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+        return LocalDateTime.parse(localDateTime, dateTimeFormatter);
     }
 
     /**
@@ -120,6 +149,19 @@ public class OwnDateTimeUtils extends DateUtils {
         }
         YearMonth yearMonth = YearMonth.of(year, month);
         return yearMonth.lengthOfMonth();
+    }
+
+    /**
+     * 根據幾年幾月，計算除總共月數
+     * @param year BigDecimal 年份
+     * @param month BigDecimal 月份
+     * @return BigDecimal 總共月數
+     */
+    public static BigDecimal getTotalMonthsWithYearAndMonth(BigDecimal year, BigDecimal month) {
+        if (ObjectUtils.isEmpty(year) || ObjectUtils.isEmpty(month)) {
+            return BigDecimal.ZERO;
+        }
+        return year.multiply(BigDecimal.valueOf(12)).add(month);
     }
 
     // Constructor only

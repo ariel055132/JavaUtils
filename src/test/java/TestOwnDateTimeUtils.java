@@ -3,7 +3,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utils.OwnDateTimeUtils;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @DisplayName("Unit Test for my own DateTimeUtils")
@@ -54,7 +56,7 @@ public class TestOwnDateTimeUtils {
     }
 
     @Test
-    @DisplayName("Test date utils - stringToLocalDate with DateTimeFormatter)")
+    @DisplayName("Test date utils - stringToLocalDate with DateTimeFormatter")
     void testStringToLocalDateWithDateTimeFormatter() {
         // given
         String dateString = "2021-01-01";
@@ -77,6 +79,80 @@ public class TestOwnDateTimeUtils {
 
         // when
         LocalDate actualResult = OwnDateTimeUtils.stringToLocalDate(dateString, pattern);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDateTime with DateTimeFormatter")
+    void testStringToLocalDateTimeWithDateTimeFormatter() {
+        // given
+        String localDateTime = "2021-01-01 12:00:00";
+        LocalDateTime expectedResult = LocalDateTime.of(2021, 1, 1, 12, 0, 0);
+
+        // when
+        LocalDateTime actualResult = OwnDateTimeUtils.stringToLocalDateTime(localDateTime, OwnDateTimeUtils.YYYY_MM_DD_HH_MM_SS);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDateTime with null localDateTime")
+    void testStringToLocalDateTimeWithNullDateTimeFormatter() {
+        // given
+        String localDateTime = null;
+        DateTimeFormatter pattern = OwnDateTimeUtils.YYYY_MM_DD_HH_MM_SS;
+        LocalDateTime expectedResult = null;
+
+        // when
+        LocalDateTime actualResult = OwnDateTimeUtils.stringToLocalDateTime(localDateTime, pattern);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDateTime with null pattern")
+    void testStringToLocalDateTimeWithNullPattern() {
+        // given
+        String localDateTime = "2021-01-01 12:00:00";
+        DateTimeFormatter pattern = null;
+        LocalDateTime expectedResult = null;
+
+        // when
+        LocalDateTime actualResult = OwnDateTimeUtils.stringToLocalDateTime(localDateTime, pattern);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDateTime with self-defined pattern")
+    void testStringToLocalDateTimeWithSelfDefinedPattern() {
+        // given
+        String localDateTime = "2021-01-01 12:30:45";
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        LocalDateTime expectedResult = LocalDateTime.of(2021, 1, 1, 12, 30, 45);
+
+        // when
+        LocalDateTime actualResult = OwnDateTimeUtils.stringToLocalDateTime(localDateTime, pattern);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDateTime with null pattern (String)")
+    void testStringToLocalDateTimeWithNullPatternString() {
+        // given
+        String localDateTime = "2021-01-01 12:00:00";
+        String pattern = null;
+        LocalDateTime expectedResult = null;
+
+        // when
+        LocalDateTime actualResult = OwnDateTimeUtils.stringToLocalDateTime(localDateTime, pattern);
 
         // then
         Assertions.assertEquals(expectedResult, actualResult);
@@ -179,6 +255,36 @@ public class TestOwnDateTimeUtils {
 
         // when
         int actualResult = OwnDateTimeUtils.getLengthOfDaysInMonth(year, month);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - getTotalMonthsWithYearAndMonth")
+    void testGetTotalMonthsWithYearAndMonth() {
+        // given
+        BigDecimal year = BigDecimal.valueOf(2);
+        BigDecimal month = BigDecimal.valueOf(3);
+        BigDecimal expectedResult = BigDecimal.valueOf(27);
+
+        // when
+        BigDecimal actualResult = OwnDateTimeUtils.getTotalMonthsWithYearAndMonth(year, month);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - getTotalMonthsWithYearAndMonth with null input")
+    void testGetTotalMonthsWithYearAndMonthWithNullInput() {
+        // given
+        BigDecimal year = null;
+        BigDecimal month = null;
+        BigDecimal expectedResult = BigDecimal.ZERO;
+
+        // when
+        BigDecimal actualResult = OwnDateTimeUtils.getTotalMonthsWithYearAndMonth(year, month);
 
         // then
         Assertions.assertEquals(expectedResult, actualResult);
