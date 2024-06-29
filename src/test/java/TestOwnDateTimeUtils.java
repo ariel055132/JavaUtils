@@ -110,4 +110,32 @@ public class TestOwnDateTimeUtils {
         // then
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    @DisplayName("Test date utils - getAge1")
+    void testGetAge1() {
+        // given
+        LocalDate dateOfBirth = LocalDate.of(1990, 1, 1);
+        int expectedResult = 34;
+
+        // when
+        Long actualResult = OwnDateTimeUtils.getAge(dateOfBirth);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - getAge2")
+    void testGetAge2() {
+        // given
+        LocalDate dateOfBirth = LocalDate.of(1998, 12, 14);
+        int expectedResult = 25;
+
+        // when
+        Long actualResult = OwnDateTimeUtils.getAge(dateOfBirth);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }

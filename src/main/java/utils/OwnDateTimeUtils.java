@@ -6,6 +6,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -54,7 +55,7 @@ public class OwnDateTimeUtils extends DateUtils {
      * @return LocalDate
      */
     public static LocalDate stringToLocalDate(String dateString, DateTimeFormatter pattern) {
-        if (dateString == null || pattern == null) {
+        if (StringUtils.isEmpty(dateString) || ObjectUtils.isEmpty(pattern)) {
             return null;
         }
         return LocalDate.parse(dateString, pattern);
@@ -83,6 +84,25 @@ public class OwnDateTimeUtils extends DateUtils {
      */
     public static Long getDateDifferenceAsDays(LocalDate dateFrom, LocalDate dateTo) {
         return ChronoUnit.DAYS.between(dateFrom, dateTo);
+    }
+
+    /**
+     * 計算年齡
+     * 例如：若使用者生日為1990-01-01，今天是2021-01-01，則年齡為31歲；但若今天是2020-12-31，則年齡為30歲
+     * Calculate age.
+     * For example: if the user's birthday is January 1, 1990, and today is January 1, 2021, the age is 31 years old; but if today is December 31, 2020, the age is 30 years old.
+     * @param birthDay LocalDate 生日
+     * @return Long 年齡
+     */
+    public static Long getAge(LocalDate birthDay) {
+        if (ObjectUtils.isEmpty(birthDay)) {
+            return null;
+        }
+        // Current date
+        LocalDate now = LocalDate.now();
+        // Calculate Age
+        int age = Period.between(birthDay, now).getYears();
+        return (long) age;
     }
 
     // Constructor only
