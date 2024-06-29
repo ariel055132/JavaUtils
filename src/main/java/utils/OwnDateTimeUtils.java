@@ -68,7 +68,7 @@ public class OwnDateTimeUtils extends DateUtils {
      * Convert String to LocalDateTime
      * @param localDateTime String
      * @param pattern DateTimeFormatter
-     * @return
+     * @return LocalDateTime
      */
     public static LocalDateTime stringToLocalDateTime(String localDateTime, DateTimeFormatter pattern) {
         if (StringUtils.isEmpty(localDateTime) || ObjectUtils.isEmpty(pattern)) {

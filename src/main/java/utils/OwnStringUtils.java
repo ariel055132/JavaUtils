@@ -9,8 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 public class OwnStringUtils extends StringUtils {
     /**
      * Give a default value ("") if the string is null.
-     * @param str
-     * @return
+     * 若字串為空字串，給予預設值("")
+     * @param str String
+     * @return string
      */
     public static String defaultString(String str) {
         return StringUtils.defaultString(str, "");
@@ -19,9 +20,9 @@ public class OwnStringUtils extends StringUtils {
     /**
      * Check if the substring is contained within the string.
      * 檢查預期字串是否在另一個字串內部，若有則回傳true，否則回傳false
-     * @param seq
-     * @param searchSeq
-     * @return
+     * @param seq CharSequence
+     * @param searchSeq CharSequence
+     * @return boolean
      */
     public static boolean contains(CharSequence seq, CharSequence searchSeq) {
         return StringUtils.contains(seq, searchSeq);
@@ -30,9 +31,9 @@ public class OwnStringUtils extends StringUtils {
     /**
      * Check if the string (cs1) is equal to another string (cs2).
      * It is case-sensitive.
-     * @param cs1 待檢查的字串 (The string to be checked)
-     * @param cs2 要比對的字串 (The string to be compared)
-     * @return
+     * @param cs1 CharSequence 待檢查的字串 (The string to be checked)
+     * @param cs2 CharSequence 要比對的字串 (The string to be compared)
+     * @return boolean
      */
     public static boolean equals(CharSequence cs1, CharSequence cs2) {
         return StringUtils.equals(cs1, cs2);
@@ -41,9 +42,9 @@ public class OwnStringUtils extends StringUtils {
     /**
      * Check if the string (cs1) is equal to another string (cs2).
      * It is case-insensitive.
-     * @param cs1 待檢查的字串 (The string to be checked)
-     * @param cs2 要比對的字串 (The string to be compared)
-     * @return
+     * @param cs1 CharSequence 待檢查的字串 (The string to be checked)
+     * @param cs2 CharSequence 要比對的字串 (The string to be compared)
+     * @return boolean
      */
     public static boolean equalsIgnoreCase(CharSequence cs1, CharSequence cs2) {
         return StringUtils.equalsIgnoreCase(cs1, cs2);
@@ -51,9 +52,9 @@ public class OwnStringUtils extends StringUtils {
 
     /**
      * Check if the string is empty.
-     *
-     * @param cs
-     * @return
+     * 檢查字串是否為空字串
+     * @param cs CharSequence
+     * @return boolean
      */
     public static boolean isEmpty(CharSequence cs) {
         // Whether the length of char sequence is 0 or it is null.
@@ -82,7 +83,7 @@ public class OwnStringUtils extends StringUtils {
 
     /**
      * Check if the string is alpha-numeric. (A-Z, a-z, 0-9)
-     * @param cs 待檢查的字串
+     * @param cs CharSequence 待檢查的字串
      * @return boolean 是否為字母及數字
      */
     public static boolean isAlphaNumericSpace(CharSequence cs) {
@@ -90,7 +91,8 @@ public class OwnStringUtils extends StringUtils {
     }
 
     /**
-     * Check if the character is full width. (判斷字元是否為全型及符號)
+     * Check if the character is full width.
+     * 判斷字元是否為全型及符號
      * Java判断一个字符串是否有中文一般情况是利用Unicode编码(CJK统一汉字的编码区间：0x4e00–0x9fbb)的正则来做判断，但是其实这个区间来判断中文不是非常精确，因为有些中文的标点符号比如：，。等等是不能识别的。
      * Ref. http://www.micmiu.com/lang/java/java-check-chinese/
      * @param c char
@@ -111,18 +113,21 @@ public class OwnStringUtils extends StringUtils {
     }
 
     /**
-     * Check if the character is half width. (判斷字元是否為半型)
-     *
+     * Check if the character is half width.
+     * 判斷字元是否為半型
+     * @param c char
+     * @return boolean 該char是否為半型字元
      */
     public static boolean isHalfWidth(char c) {
         return !isFullWidth(c);
     }
 
     /**
-     * Convert the string to full width. (將字串轉換為全型字元)
+     * Convert the string to full width.
+     * 將字串轉換為全型字元
      * Ref: https://malagege.github.io/blog/posts/%E7%A8%8B%E5%BC%8F%E5%8D%8A%E5%9E%8B%E8%BD%89%E5%85%A8%E5%9E%8B%E6%96%B9%E6%B3%95/
-     * @param str 要轉換的字串
-     * @return 轉換後的全型字串
+     * @param str String 要轉換的字串
+     * @return string String 轉換後的全型字串
      */
     public static String convertToFullWidth(String str) {
         // 判斷是否為空字串，若是則直接回傳
@@ -144,7 +149,7 @@ public class OwnStringUtils extends StringUtils {
     /**
      * Convert the string to half width. (轉換成半型字串，平時用的字串都是半型字串，全型字串是指全角字符，占两个字符位置，如中文字符。
      * Ref: https://malagege.github.io/blog/posts/%E7%A8%8B%E5%BC%8F%E5%8D%8A%E5%9E%8B%E8%BD%89%E5%85%A8%E5%9E%8B%E6%96%B9%E6%B3%95/
-     * @param str 要轉換的字串
+     * @param str String 要轉換的字串
      * @return 轉換後的半型字串
      */
     public static String convertToHalfWidth(String str) {
@@ -170,7 +175,7 @@ public class OwnStringUtils extends StringUtils {
      * @param str 字串
      * @param size 字串長度
      * @param padChar 要補的字元
-     * @return
+     * @return String
      */
     public static String leftPad(String str, int size, char padChar) {
         return StringUtils.leftPad(str, size, padChar);
@@ -195,11 +200,27 @@ public class OwnStringUtils extends StringUtils {
 
     /**
      * Substring
+     * @param str String
+     * @param int start
+     * @param int end
+     * @return String
      */
     public static String substring(String str, int start, int end) {
         return StringUtils.substring(str, start, end);
     }
 
+    /**
+     * 檢查字串是否以suffix結尾
+     * Check if the string ends with the suffix.
+     * @param str CharSequence
+     * @param suffix CharSequence
+     * @return boolean
+     */
+    public static boolean endsWith(CharSequence str, CharSequence suffix) {
+        return StringUtils.endsWith(str, suffix);
+    }
+
+    // Constructor
     private OwnStringUtils() {
     }
 }

@@ -322,4 +322,34 @@ public class TestOwnStringUtils {
         // then
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    @DisplayName("Test endsWith - Positive")
+    void testEndsWithPositive() {
+        // given
+        String str = "AA12345678S";
+        String suffix = "S";
+        boolean expectedResult = true;
+
+        // when
+        boolean actualResult = OwnStringUtils.endsWith(str, suffix);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test endsWith - Negative")
+    void testEndsWithNegative() {
+        // given
+        String str = "AA12345678S";
+        String suffix = "s";
+        boolean expectedResult = false;
+
+        // when
+        boolean actualResult = OwnStringUtils.endsWith(str, suffix);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
