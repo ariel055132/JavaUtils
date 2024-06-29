@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import utils.OwnDateTimeUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @DisplayName("Unit Test for my own DateTimeUtils")
 public class TestOwnDateTimeUtils {
@@ -47,6 +48,64 @@ public class TestOwnDateTimeUtils {
 
         // when
         LocalDate actualResult = OwnDateTimeUtils.stringToLocalDate(dateString, pattern);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDate with DateTimeFormatter)")
+    void testStringToLocalDateWithDateTimeFormatter() {
+        // given
+        String dateString = "2021-01-01";
+        LocalDate expectedResult = LocalDate.of(2021, 1, 1);
+
+        // when
+        LocalDate actualResult = OwnDateTimeUtils.stringToLocalDate(dateString, OwnDateTimeUtils.YYYY_MM_DD_DASH);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - stringToLocalDate with null input")
+    void testStringToLocalDateWithNullInputDateTimeFormatter() {
+        // given
+        String dateString = "2021-01-01";
+        DateTimeFormatter pattern = null;
+        LocalDate expectedResult = null;
+
+        // when
+        LocalDate actualResult = OwnDateTimeUtils.stringToLocalDate(dateString, pattern);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - localDateToString")
+    void testLocalDateToString() {
+        // given
+        LocalDate localDate = LocalDate.of(2021, 1, 1);
+        String expectedResult = "2021-01-01";
+
+        // when
+        String actualResult = OwnDateTimeUtils.localDateToString(localDate, OwnDateTimeUtils.YYYY_MM_DD_DASH);
+
+        // then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test date utils - getDateDifferenceAsDays")
+    void testGetDateDifferenceAsDays() {
+        // given
+        LocalDate dateFrom = LocalDate.of(2021, 1, 1);
+        LocalDate dateTo = LocalDate.of(2021, 1, 10);
+        Long expectedResult = 9L;
+
+        // when
+        Long actualResult = OwnDateTimeUtils.getDateDifferenceAsDays(dateFrom, dateTo);
 
         // then
         Assertions.assertEquals(expectedResult, actualResult);

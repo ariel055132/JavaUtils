@@ -1,10 +1,13 @@
 package utils;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 日期共用函數
@@ -12,11 +15,18 @@ import java.time.format.DateTimeFormatter;
 
 public class OwnDateTimeUtils extends DateUtils {
     // Pre-defined DateTime String
-    public static String S_YYYYMMDD = "yyyyMMDD";
+    public static String S_YYYY_MM_DD = "yyyyMMDD";
+    public static String S_YYYY_MM_DD_DASH = "yyyy-MM-dd";
+    public static String S_YYYY_MM_DD_SLASH = "yyyy/MM/dd";
+    public static String S_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+    public static String S_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     // Pre-defined DateTimeFormatter
     // 先定義好，並compile一些常用的日期/時間格式，避免Performance問題
-    public static final DateTimeFormatter YYYYMMDD = DateTimeFormatter.ofPattern(S_YYYYMMDD);
+    public static final DateTimeFormatter YYYY_MM_DD = DateTimeFormatter.ofPattern(S_YYYY_MM_DD);
+    public static final DateTimeFormatter YYYY_MM_DD_DASH = DateTimeFormatter.ofPattern(S_YYYY_MM_DD_DASH);
+    public static final DateTimeFormatter YYYY_MM_DD_SLASH = DateTimeFormatter.ofPattern(S_YYYY_MM_DD_SLASH);
+    public static final DateTimeFormatter YYYY_MM_DD_HH_MM_SS = DateTimeFormatter.ofPattern(S_YYYY_MM_DD_HH_MM_SS);
 
     public static LocalDateTime nowLocalDateTime() {
         return LocalDateTime.now();
@@ -25,7 +35,7 @@ public class OwnDateTimeUtils extends DateUtils {
     /**
      * 將字串轉換成LocalDate
      * Convert String to LocalDate
-     * @param dateString 日期字串 (String
+     * @param dateString 日期字串 (String)
      * @param pattern    日期格式 (String)
      * @return LocalDate
      */
@@ -37,6 +47,12 @@ public class OwnDateTimeUtils extends DateUtils {
         return LocalDate.parse(dateString, formatter);
     }
 
+    /**
+     * 使用自定義的日期格式，將日期字串轉換成LocalDate
+     * @param dateString String
+     * @param pattern DateTimeFormatter
+     * @return LocalDate
+     */
     public static LocalDate stringToLocalDate(String dateString, DateTimeFormatter pattern) {
         if (dateString == null || pattern == null) {
             return null;
@@ -44,6 +60,32 @@ public class OwnDateTimeUtils extends DateUtils {
         return LocalDate.parse(dateString, pattern);
     }
 
-    private OwnDateTimeUtils() {
+    /**
+     * 將LocalDate(日期)轉換成字串
+     * Convert LocalDate to String with given formatter
+     * @param localDate LocalDate
+     * @param formatter DateTimeFormatter
+     * @return String
+     */
+    public static String localDateToString(LocalDate localDate, DateTimeFormatter formatter) {
+        if (ObjectUtils.isEmpty(localDate)|| ObjectUtils.isEmpty(formatter)) {
+            return StringUtils.EMPTY;
+        }
+        return localDate.format(formatter);
+    }
+
+    /**
+     * 計算兩個日期之間的差距
+     * Get difference between dateFrom and dateTo as days
+     * @param dateFrom LocalDate
+     * @param dateTo LocalDate
+     * @return Long
+     */
+    public static Long getDateDifferenceAsDays(LocalDate dateFrom, LocalDate dateTo) {
+        return ChronoUnit.DAYS.between(dateFrom, dateTo);
+    }
+
+    // Constructor only
+    private void OwnDateTimeUtils () {
     }
 }
